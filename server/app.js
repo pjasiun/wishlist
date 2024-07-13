@@ -10,7 +10,7 @@ app.use(express.json())
 
 const notion = new Client({ auth: authSecret })
 
-app.get('/images/', async (req, res) => {
+app.get('/data/', async (req, res) => {
   const master = await notion.databases.query({
     database_id: databaseId,
     filter: {

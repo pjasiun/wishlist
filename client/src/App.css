@@ -2,33 +2,11 @@
   text-align: center;
 }
 
-.loader {
-  background-color: #faecec;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+:root:root {
+  --swiper-theme-color: #16a2d1;
 }
 
-.loader-giftbox {
-  animation: pluse 15s linear infinite alternate;
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@keyframes pluse {
-  from {
-    transform: scale(1.0);
-  }
-  to {
-    transform: scale(4);
-  }
-}
-
-div.frame {
+div.photoFrame {
   position: relative;
   height: 100vh;
   width: 100vw;
@@ -50,8 +28,4 @@ img.photo {
   margin: auto;
 
   border: #f6d6d6 4px solid;
-}
-
-:root:root {
-  --swiper-theme-color: #16a2d1;
 }
