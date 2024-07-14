@@ -7,7 +7,7 @@ import { useEffect, useState } from 'react';
 import 'swiper/css'
 import 'swiper/css/navigation'
 
-import { getData } from './api';
+import { getData, setBooking } from './api';
 
 import Loader from './Loader'
 
@@ -22,12 +22,24 @@ function App({isPWA}) {
     init()
   }, [isPWA])
 
-  const init = async () => {
+  async function init() {
     setData([])
 
     const data = await getData();
 
     setData(data)
+  }
+
+  function book(pageId) {
+    const booker = prompt('Kto rezerwuje?')
+
+    setBooking(pageId, booker);
+
+    setData(data.map(item =>
+      item.id !== pageId ? item : {
+        ...item,
+        isBooked: true
+    }))
   }
 
   return (
@@ -41,6 +53,16 @@ function App({isPWA}) {
               <div className="photoFrame">
                 <img className="photo" src={item.image} alt={item.title} />
               </div>
+              <h1>{item.title}</h1>
+              <p>
+                {item.isBooked ? (
+                  'Zarezerwowane'
+                ) : (
+                  <button onClick={() => book(item.id)}>Zarezerwuj</button>
+                )}
+              </p>
+              <p>Cena: {item.price}</p>
+              <p>link: {item.link}</p>
             </SwiperSlide>
           ))}
         </Swiper>

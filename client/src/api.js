@@ -19,3 +19,14 @@ export async function getData() {
 
     return data;
 }
+
+export async function setBooking(pageId, booker) {
+  const headers = new Headers()
+  headers.append('Content-Type', 'application/json')
+
+  return await fetch('https://laura.jasiun.pl/book/', {
+    method: 'POST',
+    body: JSON.stringify({ pageId, booker }),
+    headers,
+  })
+}

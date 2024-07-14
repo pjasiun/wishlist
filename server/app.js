@@ -46,7 +46,7 @@ app.get('/data/', async (req, res) => {
 })
 
 app.post('/book/', async (req, res) => {
-  const pageId = req.body?.id
+  const pageId = req.body?.pageId
   const booker = req.body?.booker
 
   if (!pageId) {
