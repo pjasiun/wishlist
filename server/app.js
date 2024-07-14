@@ -21,6 +21,8 @@ app.get('/data/', async (req, res) => {
     },
   })
 
+  // res.send(master.results)
+
   const promises = master.results.map(
     ({ id, properties }) =>
       new Promise(async (resolve) => {
@@ -31,9 +33,11 @@ app.get('/data/', async (req, res) => {
         resolve({
           id,
           price: properties['Cena']?.number,
-          link: properties['Gdzie kupic?']?.url,
-          title: properties['Prezent']?.title[0]?.text?.content,
-          isBooked: !!properties['Rezerwacja']?.rich_text[0]?.plain_text,
+          link: toText(properties['Gdzie kupic?']?.rich_text),
+          title: toText(properties['Prezent']?.title),
+          description: toText(properties['Opis']?.rich_text),
+          price: properties['Cena']?.number,
+          isBooked: !!toText(properties['Rezerwacja']?.rich_text),
           image: child.results.find((content) => content.type == 'image')?.image
             ?.file?.url,
         })
@@ -80,3 +84,10 @@ app.post('/book/', async (req, res) => {
 app.listen(port, () => {
   console.log(`App started on port ${port}`)
 })
+
+function toText(richText) {
+  return richText
+    .filter((item) => item.type === 'text')
+    .map((item) => item.plain_text)
+    .join('')
+}
