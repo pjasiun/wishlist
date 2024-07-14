@@ -16,10 +16,13 @@ import { getData, setBooking } from './api'
 
 import Loader from './Loader'
 
+import logo from './logo.svg'
+
 import Button from '@mui/material/Button'
 import LabeledUrl, { isValidUrl } from './LabeledUrl'
 import {
   Card,
+  CardContent,
   Dialog,
   DialogActions,
   DialogContent,
@@ -125,46 +128,71 @@ function App({ isPWA }) {
       {data.length === 0 ? (
         <Loader />
       ) : (
-        <Swiper modules={[Navigation]} slidesPerView={1} navigation>
-          {data.map((item) => (
-            <SwiperSlide key={item.id}>
-              <Card>
-                <div className="photoFrame">
-                  <h1>{item.title}</h1>
-                  <p>
-                    {item.isBooked ? (
-                      <Button variant="contained" disabled>
-                        Zarezerwowane
-                      </Button>
-                    ) : (
-                      <Button
-                        variant="contained"
-                        onClick={() => openConfirm(item.id)}
-                      >
-                        Zarezerwuj
-                      </Button>
-                    )}
-                  </p>
-                  <img className="photo" src={item.image} alt={item.title} />
+        <main>
+          <header>
+            <img src={logo} alt="logo" />
+            <h1 className="App-h1-text">Prezenty Laury</h1>
+          </header>
+          <Swiper
+            modules={[Navigation]}
+            slidesPerView={'auto'}
+            navigation
+            centeredSlides={true}
+            keyboard={{
+              enabled: true,
+            }}
+            className="App-Swiper"
+          >
+            {data.map((item) => (
+              <SwiperSlide key={item.id} className="App-SwiperSlide">
+                <div className="App-card-frame">
+                  <Card className="App-card">
+                    <CardContent className="App-card-content">
+                      <div className="App-card-header">
+                        <h2>{item.title}</h2>
+                        <div class="App-card-bookbutton">
+                          {item.isBooked ? (
+                            <Button variant="contained" disabled>
+                              Zarezerwowane
+                            </Button>
+                          ) : (
+                            <Button
+                              variant="contained"
+                              onClick={() => openConfirm(item.id)}
+                            >
+                              Zarezerwuj
+                            </Button>
+                          )}
+                        </div>
+                      </div>
+                      <img
+                        className="App-card-photo"
+                        src={item.image}
+                        alt={item.title}
+                      />
+                      <div className="App-card-details">
+                        {item.price ? <p>Cena: {item.price} zł</p> : ''}
+                        {item.link ? (
+                          <p>
+                            link:{' '}
+                            {isValidUrl(item.link) ? (
+                              <LabeledUrl>{item.link}</LabeledUrl>
+                            ) : (
+                              item.link
+                            )}
+                          </p>
+                        ) : (
+                          ''
+                        )}
+                        {item.description ? <p>{item.description}</p> : ''}
+                      </div>
+                    </CardContent>
+                  </Card>
                 </div>
-              </Card>
-              {item.price ? <p>Cena: {item.price} zł</p> : ''}
-              {item.link ? (
-                <p>
-                  link:{' '}
-                  {isValidUrl(item.link) ? (
-                    <LabeledUrl>{item.link}</LabeledUrl>
-                  ) : (
-                    item.link
-                  )}
-                </p>
-              ) : (
-                ''
-              )}
-              {item.description ? <p>{item.description}</p> : ''}
-            </SwiperSlide>
-          ))}
-        </Swiper>
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        </main>
       )}
     </div>
   )

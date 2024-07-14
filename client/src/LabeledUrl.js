@@ -14,7 +14,7 @@ export default function LabeledUrl({ children: urlString }) {
   const url = new URL(urlString)
 
   return (
-    <a href={urlString}>
+    <a href={urlString} target="_blank" rel="noreferrer">
       <span className="LabeledUrl-host">{url.host.replace('www.', '')}</span>
       {url.pathname ? (
         <span className="LabeledUrl-rest">
