@@ -1,3 +1,5 @@
+import './LabeledUrl.css'
+
 export function isValidUrl(urlString) {
   let url
 
@@ -14,7 +16,7 @@ export default function LabeledUrl({ children: urlString }) {
   const url = new URL(urlString)
 
   return (
-    <a href={urlString} target="_blank" rel="noreferrer">
+    <a href={urlString} target="_blank" rel="noreferrer" className="LabeledUrl">
       <span className="LabeledUrl-host">{url.host.replace('www.', '')}</span>
       {url.pathname ? (
         <span className="LabeledUrl-rest">

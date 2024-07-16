@@ -1,5 +1,5 @@
 :root:root {
-  --swiper-theme-color: #16a2d1;
+  --swiper-theme-color: #399918;
 }
 
 #root, div.App, main {
@@ -11,17 +11,6 @@ header {
   justify-content: center;
   align-items: center;
   height: calc(50vh - 350px);
-}
-
-header h1 {
-  padding: 0;
-  margin: 0;
-}
-
-header img {
-  height: 40px;
-  vertical-align: middle;
-  margin: 4px 4px 0;
 }
 
 div.App-Swiper {
@@ -53,10 +42,11 @@ div.App-card-frame {
   min-height: min(90vh, 700px);
 }
 
-.App-card-content {
+.App-card-content.App-card-content {
   display: flex;
   flex-direction: column;
   align-items:center;
+  padding: 16px 24px;
 }
 
 .App-card-header {
@@ -64,13 +54,18 @@ div.App-card-frame {
   justify-content: space-between;
   gap: 10px;
   width: 100%;
+  margin: 0 0 17px;
+}
+
+.App-card-header-booked {
+  text-decoration: line-through;
 }
 
 .App-card-header h2 {
-  margin-top: 0;
   font-size: 24px;
   text-overflow: ellipsis;
   overflow: hidden;
+  margin: 0;
 }
 
 img.App-card-photo {
@@ -80,4 +75,25 @@ img.App-card-photo {
 
 .App-card-details {
   width: 100%;
+  margin-top: 12px;
+}
+
+.App-card-details-row {
+  display: flex;
+  color: #646464;
+  align-items: center;
+  gap: 5px;
+}
+
+.App-card-details-row p {
+  margin: 12px 0;
+}
+
+.App-card-details-key {
+  font-weight: 700;
+  color: #646464;
+}
+
+.Dialog-text {
+  margin: 0 0 16px;
 }
