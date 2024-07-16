@@ -1,0 +1,13 @@
+.LabeledUrl {
+    color: var(--color-light-green)
+}
+
+.LabeledUrl-host {
+    font-weight: 700;
+    color: var(--color-green)
+}
+
+.LabeledUrl-rest {
+    font-weight: 300;
+    color: var(--color-green)
+}

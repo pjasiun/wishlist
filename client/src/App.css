@@ -1,41 +1,17 @@
-:root:root {
-  --swiper-theme-color: #399918;
-}
-
-#root, div.App, main {
+.App, .App-Swiper {
   height: 100%;
 }
 
-header {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: calc(50vh - 350px);
-}
-
-div.App-Swiper {
-  height: calc(50vh + 350px);
-}
-
-@media (max-height: 800px) {
-  header {
-    display: none;
-  }
-
-    div.App-Swiper{
-      height: auto;
-    }
-}
-
-div.App-SwiperSlide {
+.App-SwiperSlide {
   max-width: 1000px;
+  margin-top: calc(50vh - 350px);
   height: auto;
 }
 
-div.App-card-frame {
+.App-card-frame {
   padding: 17px;
   max-width: 830px;
-
+  margin: auto;
 }
 
 .App-card {
@@ -68,7 +44,7 @@ div.App-card-frame {
   margin: 0;
 }
 
-img.App-card-photo {
+.App-card-photo {
   max-height: 500px;
   max-width: 100%;
 }
@@ -89,11 +65,20 @@ img.App-card-photo {
   margin: 12px 0;
 }
 
-.App-card-details-key {
+.App-card-details-label {
   font-weight: 700;
   color: #646464;
 }
 
 .Dialog-text {
   margin: 0 0 16px;
+}
+
+.MuiPaper-root.MuiPaper-root {
+  border-radius: 24px;
+  box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.2);
+}
+
+.MuiButton-root.MuiButton-root {
+  border-radius: 36px
 }

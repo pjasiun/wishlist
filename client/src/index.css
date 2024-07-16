@@ -1,4 +1,12 @@
-html {
+:root:root {
+  --color-light-pink: #ffd6d7;
+  --color-almost-black: #4f4f4f;
+  --color-green: #399918;
+  --color-light-green: #7fc269;
+  --swiper-theme-color: #399918;
+}
+
+html, body, #root {
   height: 100%;
 }
 
@@ -7,32 +15,16 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
-  height: 100%;
-
-  background-color: #ffd4d5;
-  background-image: url(../public/patern/10g.jpg);
+  background-color: var(--color-light-pink);
+  background-image: url("../public/pattern.jpg");
   background-repeat: repeat;
 }
 
 h1, h2, p {
   font-family: "Noto Sans Variable", sans-serif;
-  color: #4f4f4f;
+  color: var(--color-almost-black);
 }
 
 p, input[type=text] {
   font-size: 0.875rem;
-}
-
-.MuiPaper-root.MuiPaper-root {
-  border-radius: 24px;
-  box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.2);
-}
-
-.MuiButton-root.MuiButton-root {
-  border-radius: 36px
-}
-
-.App-card-details {
-  /* display: flex;
-  justify-content: space-between */
 }
