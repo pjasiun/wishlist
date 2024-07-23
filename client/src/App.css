@@ -1,11 +1,16 @@
-.App, .App-Swiper {
+.App {
   height: 100%;
+}
+
+.App-Swiper.App-Swiper {
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: visible;
 }
 
 .App-SwiperSlide {
   max-width: 1000px;
-  margin-top: calc(50vh - 350px);
-  height: auto;
+  height: 100%;
 }
 
 .MuiPaper-root.MuiPaper-root {

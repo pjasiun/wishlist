@@ -1,17 +1,24 @@
 .GiftCard-frame {
-  padding: 17px;
-  max-width: 830px;
-  margin: auto;
+    padding: 17px;
+    max-width: 830px;
+    margin: auto;
+    margin-top: calc(50vh - 400px);
+}
+
+@media (max-height: 800px) {
+    .GiftCard-frame {
+        margin-top: 0;
+    }
 }
 
 .GiftCard {
-  min-height: min(90vh, 700px);
+  height: 100%;
 }
 
 .GiftCard-content.GiftCard-content {
   display: flex;
   flex-direction: column;
-  align-items:center;
+  align-items: center;
   padding: 16px 24px;
 }
 
