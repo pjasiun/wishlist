@@ -1,3 +1,5 @@
+import './GiftCard.css'
+
 import PaymentsIcon from '@mui/icons-material/Payments'
 import StorefrontIcon from '@mui/icons-material/Storefront'
 import DescriptionIcon from '@mui/icons-material/Description'
@@ -9,14 +11,14 @@ import { Card, CardContent } from '@mui/material'
 
 function GiftCard({ data, onBooking }) {
   return (
-    <div className="App-card-frame">
-      <Card className="App-card">
-        <CardContent className="App-card-content">
-          <div className="App-card-header">
-            <h2 className={data.isBooked ? 'App-card-header-booked' : ''}>
+    <div className="GiftCard-frame">
+      <Card className="GiftCard">
+        <CardContent className="GiftCard-content">
+          <div className="GiftCard-header">
+            <h2 className={data.isBooked ? 'GiftCard-header-booked' : ''}>
               {data.title}
             </h2>
-            <div className="App-card-bookbutton">
+            <div className="GiftCard-bookbutton">
               {data.isBooked ? (
                 <Button variant="contained" disabled>
                   Zarezerwowane
@@ -28,8 +30,8 @@ function GiftCard({ data, onBooking }) {
               )}
             </div>
           </div>
-          <img className="App-card-photo" src={data.image} alt={data.title} />
-          <div className="App-card-details">
+          <img className="GiftCard-photo" src={data.image} alt={data.title} />
+          <div className="GiftCard-details">
             <DetailsRow
               show={data.price}
               icon={<PaymentsIcon />}
@@ -68,10 +70,10 @@ function DetailsRow({ show, icon, label, children }) {
     return <div></div>
   }
   return (
-    <div className="App-card-details-row">
+    <div className="GiftCard-details-row">
       {icon}
       <p>
-        <span className="App-card-details-label">{label}</span> {children}
+        <span className="GiftCard-details-label">{label}</span> {children}
       </p>
     </div>
   )

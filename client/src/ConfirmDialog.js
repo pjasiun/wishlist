@@ -1,3 +1,5 @@
+import './ConfirmDialog.css'
+
 import {
   Dialog,
   DialogActions,
@@ -20,7 +22,7 @@ function ConfirmDialog({ open, processing, onCancel, onSubmit }) {
     >
       <DialogTitle>Rezerwacja</DialogTitle>
       <DialogContent>
-        <p className="Dialog-text">
+        <p className="ConfirmDialog-text">
           Podaj swoje imię, żebyśmy wiedzieli kto zarezerwował prezent. Twoje
           imię będzie widoczne wyłącznie dla rodziców Laury.
         </p>
