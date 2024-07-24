@@ -3,6 +3,7 @@ import './GiftCard.css'
 import PaymentsIcon from '@mui/icons-material/Payments'
 import StorefrontIcon from '@mui/icons-material/Storefront'
 import DescriptionIcon from '@mui/icons-material/Description'
+import FavoriteIcon from '@mui/icons-material/Favorite'
 
 import Button from '@mui/material/Button'
 import LabeledUrl, { isValidUrl } from './LabeledUrl'
@@ -19,19 +20,30 @@ function GiftCard({ data, onBooking }) {
               {data.title}
             </h2>
             <div className="GiftCard-bookbutton">
-              {data.isBooked ? (
-                <Button variant="contained" disabled>
-                  Zarezerwowane
-                </Button>
+              {data.isBookable ? (
+                data.isBooked ? (
+                  <Button variant="contained" disabled>
+                    Zarezerwowane
+                  </Button>
+                ) : (
+                  <Button variant="contained" onClick={onBooking}>
+                    Zarezerwuj
+                  </Button>
+                )
               ) : (
-                <Button variant="contained" onClick={onBooking}>
-                  Zarezerwuj
-                </Button>
+                ''
               )}
             </div>
           </div>
           <img className="GiftCard-photo" src={data.image} alt={data.title} />
           <div className="GiftCard-details">
+            <DetailsRow
+              show={data.priority}
+              icon={<FavoriteIcon />}
+              label="Chce:"
+            >
+              {data.priority}
+            </DetailsRow>
             <DetailsRow
               show={data.price}
               icon={<PaymentsIcon />}

@@ -19,6 +19,16 @@ app.get('/data/', async (req, res) => {
         equals: false,
       },
     },
+    sorts: [
+      {
+        property: 'Chcę',
+        direction: 'ascending',
+      },
+      {
+        property: 'Cena',
+        direction: 'ascending',
+      },
+    ],
   })
 
   // res.send(master.results)
@@ -37,7 +47,11 @@ app.get('/data/', async (req, res) => {
           title: toText(properties['Prezent']?.title),
           description: toText(properties['Opis']?.rich_text),
           price: properties['Cena']?.number,
-          isBooked: !!toText(properties['Rezerwacja']?.rich_text),
+          priority: properties['Chcę']?.select?.name,
+          isBookable: !properties['Nierezerwowalne']?.checkbox,
+          isBooked:
+            !properties['Nierezerwowalne']?.checkbox &&
+            !!toText(properties['Rezerwacja']?.rich_text),
           image: child.results.find((content) => content.type == 'image')?.image
             ?.file?.url,
         })
