@@ -1,6 +1,7 @@
 const { Client } = require('@notionhq/client')
 const express = require('express')
 const cors = require('cors')
+const sharp = require('sharp')
 
 const { port, databaseId, authSecret } = require('./config')
 
@@ -9,6 +10,9 @@ app.use(cors())
 app.use(express.json())
 
 const notion = new Client({ auth: authSecret })
+
+const cachedPagesTimestamps = {}
+const cachedImages = {}
 
 app.get('/data/', async (req, res) => {
   const master = await notion.databases.query({
@@ -31,14 +35,10 @@ app.get('/data/', async (req, res) => {
     ],
   })
 
-  // res.send(master.results)
-
   const promises = master.results.map(
-    ({ id, properties }) =>
+    ({ id, last_edited_time, properties }) =>
       new Promise(async (resolve) => {
-        const child = await notion.blocks.children.list({
-          block_id: id,
-        })
+        const image = await getImage(id, last_edited_time)
 
         resolve({
           id,
@@ -52,8 +52,7 @@ app.get('/data/', async (req, res) => {
           isBooked:
             !properties['Nierezerwowalne']?.checkbox &&
             !!toText(properties['Rezerwacja']?.rich_text),
-          image: child.results.find((content) => content.type == 'image')?.image
-            ?.file?.url,
+          image,
         })
       })
   )
@@ -98,6 +97,49 @@ app.post('/book/', async (req, res) => {
 app.listen(port, () => {
   console.log(`App started on port ${port}`)
 })
+
+async function getImage(id, last_edited_time) {
+  if (cachedPagesTimestamps[id] == last_edited_time) {
+    console.log(`used cashed page data for ${id}`)
+    return `images/${id}.jpg`
+  }
+
+  const child = await notion.blocks.children.list({
+    block_id: id,
+  })
+
+  const remoteImageUrl = child.results.find(
+    (content) => content.type == 'image'
+  )?.image?.file?.url
+
+  if (cachedImages[id] == remoteImageUrl) {
+    console.log(`used cashed image cache for ${id}`)
+    return `images/${id}.jpg`
+  }
+
+  const response = await fetch(remoteImageUrl)
+  const arrayBuffer = await response.arrayBuffer()
+  const buffer = Buffer.from(arrayBuffer)
+
+  await sharp(buffer)
+    .resize(780, 500, {
+      fit: sharp.fit.inside,
+    })
+    .withMetadata()
+    .flatten({ background: '#ffffff' })
+    .jpeg({
+      quality: 70,
+      progressive: true,
+    })
+    .toFile(`public/images/${id}.jpg`)
+
+  cachedImages[id] = remoteImageUrl
+  cachedPagesTimestamps[id] = last_edited_time
+
+  console.log(`updated image cache for ${id}`)
+
+  return `images/${id}.jpg`
+}
 
 function toText(richText) {
   return richText
